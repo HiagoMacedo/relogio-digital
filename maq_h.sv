@@ -12,14 +12,17 @@ module maq_h(input maqh_clock,
 		else begin
 			if (maqh_enable && maqh_incremento) begin
 				if(maqh_msd == 2'd2) begin
-					if(maqh_lsd == 4'd3) begin
+					if(maqh_lsd == 4'd3)
 						maqh_lsd <= 4'd0;
-					end
+					else 
+						maqh_lsd <= maqh_lsd + 4'd1;
 				end
-				if(maqh_lsd == 4'd9)
-					maqh_lsd <= 4'd0;
-				else
-					maqh_lsd <= maqh_lsd + 4'd1;
+				else begin
+					if(maqh_lsd == 4'd9)
+						maqh_lsd <= 4'd0;
+					else
+						maqh_lsd <= maqh_lsd + 4'd1;
+				end
 			end
 			else
 				maqh_lsd <= maqh_lsd;
@@ -32,14 +35,15 @@ module maq_h(input maqh_clock,
 			maqh_msd <= 2'd0;
 		else begin
 			if (maqh_enable && maqh_incremento) begin
-				if (maqh_lsd == 2'd3) begin
-					if (maqh_msd == 2'd2)
-						maqh_msd <= 2'd0;
-					else
-						maqh_msd <= maqh_msd + 2'd1;
+				if (maqh_msd == 2'd2 && maqh_lsd == 2'd3) begin
+					maqh_msd = 2'd0;
 				end
-				else
-					maqh_msd <= maqh_msd;
+				else begin
+					if(maqh_lsd == 4'd9)
+						maqh_msd <= maqh_msd + 2'd1;
+					else
+						maqh_msd <= maqh_msd;
+				end
 			end
 			else
 				maqh_msd <= maqh_msd;

@@ -4,10 +4,7 @@ module relogioDigital (input reset,CLOCK_50,
 				 output logic [6:0] m_lsd,
 				 output logic [6:0] m_msd,
 				 output logic [6:0] h_lsd,
-				 output logic [6:0] h_msd,
-				 output logic [3:0] bcd_s_lsd,
-					output logic [2:0] bcd_s_msd,
-					output logic incrementa_minuto);
+				 output logic [6:0] h_msd);
 
 	logic enable1hz;
 	
@@ -18,14 +15,14 @@ module relogioDigital (input reset,CLOCK_50,
 
 	
 	// segundos
-	//logic [3:0] bcd_s_lsd;
-	//logic [2:0] bcd_s_msd;
-	//logic incrementa_minuto;
+	logic [3:0] bcd_s_lsd;
+	logic [2:0] bcd_s_msd;
+	logic incrementa_minuto;
 	
 	maq_s maqs_display_s (
 	.maqs_clock(CLOCK_50),
 	.maqs_reset(reset),
-	.maqs_enable(CLOCK_50),
+	.maqs_enable(enable1hz),
 	.maqs_lsd(bcd_s_lsd),
 	.maqs_msd(bcd_s_msd),
 	.maqs_incrementa_minuto(incrementa_minuto));
@@ -47,7 +44,7 @@ module relogioDigital (input reset,CLOCK_50,
 	maq_m maqm_display_m(
 	.maqm_clock(CLOCK_50),
 	.maqm_reset(reset),
-	.maqm_enable(CLOCK_50),
+	.maqm_enable(enable1hz),
 	.maqm_incremento(incrementa_minuto),
 	.maqm_lsd(bcd_m_lsd),
 	.maqm_msd(bcd_m_msd),
@@ -69,7 +66,7 @@ module relogioDigital (input reset,CLOCK_50,
 	maq_h maqh_display_h(
 	.maqh_clock(CLOCK_50),
 	.maqh_reset(reset),
-	.maqh_enable(CLOCK_50),
+	.maqh_enable(enable1hz),
 	.maqh_incremento(incrementa_hora),
 	.maqh_lsd(bcd_h_lsd),
 	.maqh_msd(bcd_h_msd));
@@ -81,5 +78,6 @@ module relogioDigital (input reset,CLOCK_50,
 	bcd_7seg display_h_msd(
 	.bcd_bcd_in({2'b0, bcd_h_msd}),
 	.bcd_display_out(h_msd));
+	
 	
 endmodule 

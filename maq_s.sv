@@ -37,11 +37,13 @@ module maq_s(input maqs_clock,
 					else
 						maqs_msd <= maqs_msd + 3'd1;
 				end
-				else
+				else begin
 					maqs_msd <= maqs_msd;
+				end
 			end
-			else
+			else begin
 				maqs_msd <= maqs_msd;
+			end
 		end
 	end
 	

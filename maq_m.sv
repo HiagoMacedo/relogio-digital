@@ -43,7 +43,7 @@ module maq_m(input maqm_clock,
 	end
 	
 	always_comb begin
-		maqm_incrementa_hora = ( (maqm_lsd == 4'd9) & (maqm_msd == 3'd5) );
+		maqm_incrementa_hora = ( (maqm_lsd == 4'd9) && (maqm_msd == 3'd5) );
 	end
 				 
 endmodule 

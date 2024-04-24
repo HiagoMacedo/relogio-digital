@@ -12,7 +12,7 @@ module relogioDigital (input reset,CLOCK_50,
 	.enable_clock(CLOCK_50),
 	.enable_reset(reset),
 	.enable_pulseout(enable1hz));
-
+	
 	
 	// segundos
 	logic [3:0] bcd_s_lsd;
